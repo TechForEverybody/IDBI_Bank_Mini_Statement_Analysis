@@ -127,7 +127,10 @@ button{
     cursor: pointer;
 }
 
-
+#outputTransactions{
+    width: 100%;
+    overflow: auto;
+}
 
 
 
@@ -136,7 +139,23 @@ button{
         grid-template-columns: 1fr;
         margin: auto;
     }
-    .payment{
-        /* width: 90%; */
+}
+
+
+
+
+@media print{
+    section{
+        display: none;
+    }
+    #outputTransactions{
+        display: none;
+    }
+    table{
+        display: none;
+    }
+    footer{
+        display: none;
     }
 }
+

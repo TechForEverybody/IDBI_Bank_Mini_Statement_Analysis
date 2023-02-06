@@ -1,14 +1,12 @@
 from flask import Flask,render_template,redirect,request,jsonify
 from Analyzer import Analyzer
-
+import pandas
 import hashlib
-
 App=Flask(__name__)
-
-
-file_name="a"
+file_name=""
 encrypted_filename=""
-data={}
+data=pandas.DataFrame()
+
 
 @App.route("/")
 def index():
@@ -18,7 +16,7 @@ def index():
 def analytics():
     print(request.remote_addr)
     global file_name,encrypted_filename,data
-    if file_name:
+    if file_name!="":
         try:
             print(file_name)
             analyzer=Analyzer("./Files/"+encrypted_filename)
@@ -26,12 +24,11 @@ def analytics():
             credit_table=analyzer.getCreditTable()
             credit_type=analyzer.getCreditPaymentTypes()
             credit_sender=analyzer.getCreditPaymentRecipient()
-
             debit_table=analyzer.getDebitTable()
             debit_receiver=analyzer.getDebitPaymentRecipient()
             debit_type=analyzer.getDebitPaymentTypes()
-
-
+            data['Date']=data['Date'].apply(lambda x:str(x)[:10])
+            file_name=""
             return render_template(
                 "analytics.html",
                 file_name=file_name,
@@ -59,17 +56,30 @@ def uploadFile():
         f = request.files['file']
         print(f)
         file_name=f.filename
-        encrypted_filename=hashlib.md5(request.remote_addr.lower().encode("utf-8")).hexdigest()+"pdf"
+        encrypted_filename=hashlib.md5(request.remote_addr.lower().encode("utf-8")).hexdigest()+".pdf"
         f.save("./Files/"+encrypted_filename)
-        
     return redirect("/analytics")
 
 @App.route("/get_transactions",methods=['GET', 'POST'])
 def getTransactions():
-    global data
+    global data,encrypted_filename
     if request.method == 'POST':
-        return data.to_json()
-    return ""
+        if encrypted_filename!="":
+            return data.to_json(),200
+    return "Why Are you here 🧨🧨🧨"
+
+
+@App.route("/get_cumulative_data",methods=['GET', 'POST'])
+def getCumulativeData():
+    global data,encrypted_filename
+    if request.method == 'POST':
+        if encrypted_filename!="":
+            return jsonify({
+                "x":list(data['Date']),
+                "y":list(data['Cumulative_Balance'])
+            }),200
+    return "Why Are you here 🧨🧨🧨"
+
 
 @App.route("/error")
 def error():

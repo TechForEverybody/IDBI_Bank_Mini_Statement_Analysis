@@ -4,11 +4,6 @@ import re
 
 class Analyzer:
     def __init__(self,file_path:str) -> None:
-        """_summary_
-
-        Args:
-            file_path (str): _description_
-        """
         self.file=file_path
     @staticmethod
     def getPaymentMethod(inputString:str)->str:
@@ -83,19 +78,19 @@ class Analyzer:
         return self.Statement[self.Statement['Type']=="Cr"].sort_values(by='Date',ascending=False).reset_index(drop=True)
     def getDebitTable(self)->pandas.DataFrame:
         return self.Statement[self.Statement['Type']=="Dr"].sort_values(by="Date",ascending=False).reset_index(drop=True)
-    def getCreditPaymentTypes(self):
+    def getCreditPaymentTypes(self)->pandas.DataFrame:
         return self.Statement[self.Statement['Type']=="Cr"]['Payment_Mode'].value_counts()
-    def getDebitPaymentTypes(self):
+    def getDebitPaymentTypes(self)->pandas.DataFrame:
         return self.Statement[self.Statement['Type']=="Dr"]['Payment_Mode'].value_counts().sort_values(ascending=False)
-    def getCreditPaymentRecipient(self):
+    def getCreditPaymentRecipient(self)->pandas.DataFrame:
         return self.Statement[self.Statement['Type']=="Cr"]['Recipient_Name'].value_counts()
-    def getDebitPaymentRecipient(self):
+    def getDebitPaymentRecipient(self)->pandas.DataFrame:
         return self.Statement[self.Statement['Type']=="Dr"]['Recipient_Name'].value_counts()
-    def getNumberOfRecords(self):
+    def getNumberOfRecords(self)->int:
         return len(self.Statement)
-    def getFirstDate(self):
+    def getFirstDate(self)->str:
         return str(self.Statement.sort_values(by="Date",ascending=True).reset_index(drop=True)["Date"][0])[:10]
-    def getLastDate(self):
+    def getLastDate(self)->str:
         return str(self.Statement.sort_values(by="Date",ascending=False).reset_index(drop=True)["Date"][0])[:10]
-    def getCumulativeDifference(self):
+    def getCumulativeDifference(self)->pandas.DataFrame:
         return self.Statement.sort_values(by="Date",ascending=False).reset_index(drop=True)["Cumulative_Balance"][0]

@@ -46,6 +46,13 @@ article{
     background-position: center;
 }
 
+@media screen and (max-width: 768px) {
+    article{
+        min-height: 40vh;
+        text-align: center;
+    }
+}
+
 form{
     display: flex;
     justify-content: center;
@@ -65,6 +72,8 @@ form input{
     align-items: center;
     flex-direction: column;
     cursor: pointer;
+    border: 1px solid gray;
+    padding: 10px;
 }
 
 form input::file-selector-button{
@@ -92,3 +101,5 @@ footer{
     color: white;
     padding: 5px;
 }
+
+
