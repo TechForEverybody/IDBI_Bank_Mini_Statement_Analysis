@@ -1,0 +1,142 @@
+.ReportContainer{
+    min-height: 80vh;
+}
+
+.ReportContainer h2{
+    text-align: center;
+    margin: 20px ;
+}
+
+.initialDetails{
+    min-height: 20vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    margin: 10px auto;
+}
+.initialDetails h4{
+    text-align: center;
+}
+
+.cumulative_graph_container{
+    padding: 10px;
+}
+
+.debitDetails{
+    padding: 10px;
+    min-height: 40vh;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+@media screen and (max-width: 768px) {
+    .debitDetails{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .initialDetails{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        font-size: 0.8em;
+    }
+    .initialDetails h4{
+        text-align: left;
+    }
+}
+
+.debitStats{
+    padding: 10px;
+}
+.paymentTypes{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+}
+.payment,.recipient{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: lawngreen;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px auto ;
+    font-size: 0.7em;
+}
+.recipient{
+    background-color: deepskyblue;
+
+}
+
+table{
+    margin: 10px auto;
+}
+th,td{
+    padding: 5px;
+    font-size: 10px;
+}
+
+
+.tableScroll{
+    max-height: 80vh;
+    overflow: auto;
+}
+
+
+.tableScroll:-webkit-scrollbar{
+    display: none;
+}
+
+.crebitStats .payment{
+    background-color: #00ffa4;
+}
+
+.data{
+    margin: 10px;
+}
+
+.initials{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.initials h4{
+    margin: 10px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+input{
+    padding: 2px 10px;
+}
+button{
+    background-color:#00ffa4;
+    padding: 2px 10px;
+    cursor: pointer;
+}
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    .paymentTypes{
+        grid-template-columns: 1fr;
+        margin: auto;
+    }
+    .payment{
+        /* width: 90%; */
+    }
+}

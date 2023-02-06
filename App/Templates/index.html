@@ -6,19 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IDBI Mini Bank Statement Analysis</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='styles/Main.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='Style.css')}}" />
     <link rel="stylesheet" href="../Static/Style.css">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://cdn.jsdelivr.net/npm/react-apexcharts"></script>
+    <script src="{{url_for('static',filename='Script.js')}}"></script>
 </head>
 
 <body>
     <header>
-        <h1>IDBI Mini Bank Statement Analysis</h1>
+        <h2>IDBI Mini Bank Statement Analysis</h2>
         <nav>
             <a href="/about">About</a>
         </nav>
     </header>
+    <article>
+        <h1>Welcome to IDBI bank Mini Statement Analysis System</h1>
+    </article>
+    <form action="/upload_file" method="POST" enctype="multipart/form-data">
+        <h3>Upload Your Statement PDF file Here</h3>
+        <input type="file" name="file" onchange="checkFileType(event)" id="file" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <footer>
+        All rights are reserved || TechForEverybody
+    </footer>
 </body>
 
 </html>
